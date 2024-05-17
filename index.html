@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    div {
+      border-radius: 20px;
+      box-shadow: 0.5px 0.5px 0.5px 1px black;
+    }
+
+    p {
+      font-weight: bold;
+    }
+
+    img:hover {
+      transform: scale(1.5);
+    }
+  </style>
+
+  <body>
+    <script>
+      let data = fetch("https://fakestoreapi.com/products");
+      data
+        .then((e) => e.json())
+        .then((e) => {
+          let res = e;
+          let container = document.createElement("div");
+          container.style.display = "flex";
+          container.style.flexWrap = "wrap";
+          container.style.gap = "10px";
+          container.style.justifyContent = "center";
+          container.style.alignItems = "center";
+          document.body.appendChild(container);
+          for (i of res) {
+            console.log(i);
+
+            let div1 = document.createElement("div");
+            container.appendChild(div1);
+            div1.style.width = "400px";
+            div1.style.height = "550px";
+            div1.style.backgroundColor = "aliceblue";
+            div1.style.textAlign = "center";
+            div1.style.border = "2px solid black";
+
+            let p1 = document.createElement("p");
+            p1.style.fontSize = "100%";
+            p1.style.color = "red";
+            div1.appendChild(p1);
+            p1.innerHTML = i.title;
+
+            let p2 = document.createElement("img");
+            p2.style.height = "30%";
+            p2.style.width = "30%";
+            p2.src = i.image;
+            div1.appendChild(p2);
+
+            let p3 = document.createElement("p");
+            p3.style.fontSize = "100%";
+            p3.style.color = "blue";
+            p3.innerHTML = `<b>Category:</b>${i.category}`;
+            div1.appendChild(p3);
+
+            let p4 = document.createElement("p");
+            p4.style.fontSize = "100%";
+            p4.innerHTML = `<b>Price:</b>${i.price}`;
+            div1.appendChild(p4);
+            let p5 = document.createElement("p");
+            p5.style.fontSize = "100%";
+            p5.innerHTML = `<b>Rating:</b>${i.rating.rate}`;
+            div1.appendChild(p5);
+            let p6 = document.createElement("p");
+            p6.style.fontSize = "90%";
+            p6.innerHTML = `<b>Count:</b>${i.rating.count}`;
+            div1.appendChild(p6);
+
+            let p7 = document.createElement("p");
+            p7.style.fontSize = "80%";
+            p7.style.fontWeight = "100";
+            p7.innerHTML = i.description;
+            div1.appendChild(p7);
+          }
+        });
+    </script>
+  </body>
+</html>
